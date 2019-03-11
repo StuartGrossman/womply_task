@@ -20,7 +20,7 @@ router.post('/', function(req, res){
               returnData['geoLocation'] = obj
           }
           else{
-            // console.log(error)
+            // console.log(error);
             return error
           }
       })
