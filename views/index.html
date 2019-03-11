@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="no-js" ng-app="app">
+<meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
+		<title>Womply Assignment</title>
+		<meta name="description" content="I have spent the last 28 years of my life representing clients. I love helping people through difficult times in their lives to the extent I can. I have represented thousands of clients and have tried over 200 jury trials. I can proudly say it is extremely rare that a client is not extremely happy with the services my office provides. I have a passion for what I do and the work ethic to continue to provide exemplary service to my clients.">
+    <meta name="keywords" content="Daniel, G, Kay, Law, Lawyer, Attorney, At, Law, Help, Colorado, CO, Free, Consultation">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- Favicons -->
+		<link rel="shortcut icon" href="../img/favicon.ico">
+		<!-- FONTS -->
+		<link rel='stylesheet' id='Roboto-css' href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700'>
+		<link rel='stylesheet' id='Patua+One-css' href='http://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700'>
+		<!-- CSS -->
+		<link rel='stylesheet' id='global-css' href='../css/global.css'>
+		<link rel='stylesheet' id='global-css' href='../css/bootstrap.css'>
+		<link rel='stylesheet' id='structure-css' href='../css/structure.css'>
+		<link rel='stylesheet' id='local-css' href='../css/lawyer.css'>
+		<link rel='stylesheet' id='custom-css' href='../css/custom.css'>
+
+
+
+
+	</head>
+
+	<body class=" layout-full-width no-content-padding header-classic sticky-header sticky-white subheader-both-center" ng-cloak>
+	<!-- Main Theme Wrapper -->
+<div id="Wrapper">
+
+	 <div id="Header_wrapper" >
+			<header id="">
+				<div id="Top_bar">
+            <div class="container">
+                <div class="column one">
+                    <div class="top_bar_left clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+			</header>
+		</div>
+			<!-- Main Content -->
+		<div id="Content" ng-controller="CityController as vm" style="heigh:100%;">
+			<div class="content_wrapper clearfix">
+				<div class="sections_group">
+					<div class="entry-content" >
+						<div class="section " style="padding-top:40px; padding-bottom:0px; background-color:#000d57; height:100%;">
+							<div class="section_wrapper clearfix">
+								<div class="items_group clearfix">
+
+									<div class="row" style="margin-bottom: 15px;">
+										<div class="col-md-4 col-sm-4 col-lg-4 col-xs-8">
+											<input class="form-control" placeholder="Search a locations weather" ng-model="vm.city.name" style="height:45px;" />
+										</div>
+										<div class="col-md-1 col-sm-1 col-lg-1 col-xs-4">
+											<button ng-click="vm.sendCitySearch()" class="btn btn-lg btn-primary">Search!</button>
+										</div>
+										<div class="col-md-1 col-sm-1 col-lg-1 ">
+										</div>
+										<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12" style="margin-top:3px;">
+											<form class="form-inline">
+												<select ng-model="vm.temp" ng-change="vm.changeTemp()" ng-initial >
+													<option selected>Choose a type of temperature</option>
+													<option ng-model="vm.imperial" value="1">Imperial</option>
+													<option ng-model="vm.metric" value="2">Metric</option>
+													<option value="3">Both</option>
+												</select>
+											</form>
+										</div>
+									</div>
+
+									<div class="row" ng-show="vm.nothingFound">
+										<h5 style="color: red">No locations found please search again.</h5>
+									</div>
+
+									<div ng-show="vm.locations.length > 0">
+										<hr />
+										<h3 style="color:white;">Favorite Locations</h3>
+									</div>
+
+									<div class="cityBlocks">
+										<div class="row well fadeIn"  ng-repeat="location in vm.locations track by $index" style="padding-top: 5px; padding-bottom:5px;">
+											
+											<div class="col-md-4 col-sm-4 col-lg-4 col-xs-6 paddingClass">
+												<span ng-if="location.geoLocation.Details.DMA.EnglishName" >
+												 	<b>{{ location.geoLocation.Details.DMA.EnglishName}}</b>
+												</span>
+												<span ng-if="!location.geoLocation.Details.DMA.EnglishName">
+													<b>{{location.locationName}}, {{ location.geoLocation.Country.ID }}</b>
+												</span>
+											</div>
+
+											<div class="col-md-2 col-sm-2 col-lg-1 col-xs-3 paddingClass" ng-show="vm.imperial" >
+												<span >
+												 F: <b>{{location.tempature[0].Temperature.Imperial.Value}}</b>
+											 </span>
+											</div>
+
+											<div class="col-md-2 col-sm-2 col-lg-1 col-xs-3 paddingClass" ng-show="vm.metric">
+												<span >
+												 C: <b>{{location.tempature[0].Temperature.Metric.Value}}</b>
+											  </span>
+											</div>
+
+											<div class="col-md-2 col-sm-2 col-lg-2 col-xs-6">
+												<span style="font-size:15px">
+												  <img ng-src="https://developer.accuweather.com/sites/default/files/{{vm.locationIcon[$index]}}-s.png">
+												</span>
+											</div>
+
+											<div class="col-md-2 col-sm-2 col-lg-2 col-xs-6" style=" padding-top:6px;">
+												<button class="btn-sm btn-danger" ng-click="vm.removeItem($index)" style="vertical-align:text-bottom;">X</button>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="section full-width sections_style_0 " >
+							<div class="section_wrapper clearfix">
+								<div class="items_group clearfix">
+									<!-- One full width row-->
+									<div class="column one column_map ">
+
+										<!-- Google map area -->
+											<div class="google-map-wrapper no_border">
+											<div class="google-map" id="map" style="width:100%; height:600px;">
+												&nbsp;
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="section the_content no_content">
+							<div class="section_wrapper">
+								<div class="the_content_wrapper"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- Footer-->
+		<footer id="Footer" class="clearfix">
+
+            <div class="footer_copy">
+                <div class="container">
+                    <div class="column one">
+                        <a id="back_to_top" href="#" class="button button_left button_js"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
+                        <div class="copyright">
+                            &copy; Development by Stuart Grossman
+                        </div>
+                        <ul class="social">
+                            <li class="linkedin">
+                                <a target="_blank" href="https://www.linkedin.com/in/stuart-grossman-4b0ba782/" title="LinkedIn"><i class="icon-linkedin"></i></a>
+                            </li>
+														<li class="github">
+																<a target="_blank" href="https://github.com/StuartGrossman.git" title="github"><i class="icon-github"></i></a>
+														</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		</div>
+
+
+		<!-- JS -->
+		<script
+   		 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvr6HzHXPIpgxdoT6u4B1xfhE20owmDvo">
+  	</script>
+    <script type="text/javascript" src="../js/utilites/googlemap.js"></script>
+		<script type="text/javascript" src="../angular/angular.js"></script>
+		<script type="text/javascript">
+			var myApp = angular.module('app', []);
+
+			//allows for inital html presets to persist
+
+			myApp.directive('ngInitial', function () {
+			return {
+			    restrict: 'A',
+			    controller: ['$scope', '$element', '$attrs', '$parse', function ($scope, $element, $attrs, $parse) {
+			        val = $attrs.sbInitial || $attrs.value || $element.val() || $element.text()
+			        getter = $parse($attrs.ngModel)
+			        setter = getter.assign
+			        setter($scope, val)
+			    }]
+			}});
+		</script>
+		<!-- <script src="../spec/jasmine.js"></script>
+		<script src="../spec/jasmine-html.js"></script>
+		<script src="../spec/boot.js"></script> -->
+		<script type="text/javascript" src="../js/factorys/CityFactory.js"></script>
+		<script type="text/javascript" src="../js/controllers/CityController.js"></script>
+		<script type="text/javascript" src="../js/utilites/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../js/utilites/mfn.menu.js"></script>
+		<script type="text/javascript" src="../js/utilites/jquery.plugins.js"></script>
+		<script type="text/javascript" src="../js/utilites/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="../js/utilites/animations.js"></script>
+		<script type="text/javascript" src="../js/utilites/scripts.js"></script>
+
+
+
+	</body>
+</html>
