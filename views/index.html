@@ -5,8 +5,6 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Womply Assignment</title>
-		<meta name="description" content="I have spent the last 28 years of my life representing clients. I love helping people through difficult times in their lives to the extent I can. I have represented thousands of clients and have tried over 200 jury trials. I can proudly say it is extremely rare that a client is not extremely happy with the services my office provides. I have a passion for what I do and the work ethic to continue to provide exemplary service to my clients.">
-    <meta name="keywords" content="Daniel, G, Kay, Law, Lawyer, Attorney, At, Law, Help, Colorado, CO, Free, Consultation">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<!-- Favicons -->
@@ -16,38 +14,23 @@
 		<link rel='stylesheet' id='Patua+One-css' href='http://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700'>
 		<!-- CSS -->
 		<link rel='stylesheet' id='global-css' href='../css/global.css'>
+		<link rel='stylesheet' id='global-css' href='../css/animate.min.css'>
+
 		<link rel='stylesheet' id='global-css' href='../css/bootstrap.css'>
 		<link rel='stylesheet' id='structure-css' href='../css/structure.css'>
-		<link rel='stylesheet' id='local-css' href='../css/lawyer.css'>
 		<link rel='stylesheet' id='custom-css' href='../css/custom.css'>
-
-
-
-
 	</head>
 
-	<body class=" layout-full-width no-content-padding header-classic sticky-header sticky-white subheader-both-center" ng-cloak>
-	<!-- Main Theme Wrapper -->
-<div id="Wrapper">
+<body class="layout-full-width no-content-padding header-classic sticky-header sticky-white subheader-both-center" ng-cloak>
+  <div id="Wrapper">
 
-	 <div id="Header_wrapper" >
-			<header id="">
-				<div id="Top_bar">
-            <div class="container">
-                <div class="column one">
-                    <div class="top_bar_left clearfix">
-                    </div>
-                </div>
-            </div>
-        </div>
-			</header>
-		</div>
-			<!-- Main Content -->
+
+		<!-- Main Content -->
 		<div id="Content" ng-controller="CityController as vm" style="heigh:100%;">
 			<div class="content_wrapper clearfix">
 				<div class="sections_group">
 					<div class="entry-content" >
-						<div class="section " style="padding-top:40px; padding-bottom:0px; background-color:#000d57; height:100%;">
+						<div class="section headerSectionClass">
 							<div class="section_wrapper clearfix">
 								<div class="items_group clearfix">
 
@@ -63,7 +46,7 @@
 										<div class="col-md-4 col-sm-4 col-lg-4 col-xs-12" style="margin-top:3px;">
 											<form class="form-inline">
 												<select ng-model="vm.temp" ng-change="vm.changeTemp()" ng-initial >
-													<option selected>Choose a type of temperature</option>
+													<option selected>Choose a temperature type</option>
 													<option ng-model="vm.imperial" value="1">Imperial</option>
 													<option ng-model="vm.metric" value="2">Metric</option>
 													<option value="3">Both</option>
@@ -82,8 +65,8 @@
 									</div>
 
 									<div class="cityBlocks">
-										<div class="row well fadeIn"  ng-repeat="location in vm.locations track by $index" style="padding-top: 5px; padding-bottom:5px;">
-											
+										<div class="row well animated fadeIn"  ng-repeat="location in vm.locations track by $index" style="padding-top: 5px; padding-bottom:5px;">
+
 											<div class="col-md-4 col-sm-4 col-lg-4 col-xs-6 paddingClass">
 												<span ng-if="location.geoLocation.Details.DMA.EnglishName" >
 												 	<b>{{ location.geoLocation.Details.DMA.EnglishName}}</b>
@@ -95,13 +78,13 @@
 
 											<div class="col-md-2 col-sm-2 col-lg-1 col-xs-3 paddingClass" ng-show="vm.imperial" >
 												<span >
-												 F: <b>{{location.tempature[0].Temperature.Imperial.Value}}</b>
+												 &#8457; <b>{{location.tempature[0].Temperature.Imperial.Value}}</b>
 											 </span>
 											</div>
 
 											<div class="col-md-2 col-sm-2 col-lg-1 col-xs-3 paddingClass" ng-show="vm.metric">
 												<span >
-												 C: <b>{{location.tempature[0].Temperature.Metric.Value}}</b>
+												 &#8451; <b>{{location.tempature[0].Temperature.Metric.Value}}</b>
 											  </span>
 											</div>
 
@@ -111,7 +94,7 @@
 												</span>
 											</div>
 
-											<div class="col-md-2 col-sm-2 col-lg-2 col-xs-6" style=" padding-top:6px;">
+											<div class="col-md-2 col-sm-2 col-lg-2 col-xs-6" style="padding-top:6px;">
 												<button class="btn-sm btn-danger" ng-click="vm.removeItem($index)" style="vertical-align:text-bottom;">X</button>
 											</div>
 
@@ -149,7 +132,6 @@
 		</div>
 			<!-- Footer-->
 		<footer id="Footer" class="clearfix">
-
             <div class="footer_copy">
                 <div class="container">
                     <div class="column one">
@@ -169,7 +151,7 @@
                 </div>
             </div>
         </footer>
-		</div>
+  </div>
 
 
 		<!-- JS -->
@@ -178,22 +160,7 @@
   	</script>
     <script type="text/javascript" src="../js/utilites/googlemap.js"></script>
 		<script type="text/javascript" src="../angular/angular.js"></script>
-		<script type="text/javascript">
-			var myApp = angular.module('app', []);
-
-			//allows for inital html presets to persist
-
-			myApp.directive('ngInitial', function () {
-			return {
-			    restrict: 'A',
-			    controller: ['$scope', '$element', '$attrs', '$parse', function ($scope, $element, $attrs, $parse) {
-			        val = $attrs.sbInitial || $attrs.value || $element.val() || $element.text()
-			        getter = $parse($attrs.ngModel)
-			        setter = getter.assign
-			        setter($scope, val)
-			    }]
-			}});
-		</script>
+		<script type="text/javascript" src="../js/app.js"></script>
 		<!-- <script src="../spec/jasmine.js"></script>
 		<script src="../spec/jasmine-html.js"></script>
 		<script src="../spec/boot.js"></script> -->
@@ -208,5 +175,5 @@
 
 
 
-	</body>
+</body>
 </html>

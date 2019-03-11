@@ -4,3 +4,14 @@
 .cityBlocks {
   background-color: #000d57; margin-bottom:15px; border-radius: 4px;
 }
+.headerSectionClass {
+  /* flex: auto; */
+  height: 500px;
+  padding-top:40px;
+  height: max-content;
+  paddding-bottom: 40pz;
+  padding-bottom: 40px;
+  background-color:#000d57;
+  height:100%;
+  opacity: .8;
+}

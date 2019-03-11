@@ -10,11 +10,11 @@
 			vm.nothingFound = false; vm.status = false; // variables to show html blocks
 
 			HomeFactory.CitySender(vm.city).then(function(res){
-
+				// returns KEY value for first returned city from API location lookup
 				if(res.length > 0){ // checks to make sure obj is populated
-					vm.status = true; 
+					vm.status = true;
 					let key = res[0].Key; let name = res[0].LocalizedName; let state = res[0].AdministrativeArea.ID;
-					getLocationData(key, name, state);
+					getLocationData(key, name, state); // function to call api for more data
 					return true;
 				}
 				else{
@@ -38,10 +38,10 @@
 							isLocationNew = false;
 						}
 					}
-					// if locationNew is true, add it to the list
+					// if locationNew is true, add it to loaction array
 					if(isLocationNew){
 						vm.locations.push(res);
-						// handles icons
+						// handles icons by adding 0 before numbers less than 10
 						if(res.tempature[0].WeatherIcon < 10){
 							let iconNum = "0" + res.tempature[0].WeatherIcon;
 							vm.locationIcon.push(iconNum)
@@ -66,6 +66,7 @@
 		vm.removeItem = function(itemIndex){
 			// removes items
 			vm.locations.splice(itemIndex, 1);
+
 		}
 
 		vm.changeTemp = function(){
@@ -83,7 +84,7 @@
 		vm.initMap = function initMap(lat, lng) {
 			 let map = new google.maps.Map(document.getElementById('map'), {
 			    center: {lat: lat , lng: lng},
-			    zoom: 7,
+			    zoom: 5,
 			    scrollwheel: false
 			  });
 			 let latlng = new google.maps.LatLng(lat, lng);
@@ -97,7 +98,6 @@
 
 
 	}
-
 
 
 })();
