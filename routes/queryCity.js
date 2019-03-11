@@ -12,8 +12,11 @@ router.post('/', function(req, res){
       'http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey='+keys.api_key+'&q='+city+'&language=en-us',
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
+              // console.log(body, "body")
               res.send(body)
           }else{
+            // console.log(error, "error")
+
             return error
           }
       }

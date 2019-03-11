@@ -15,10 +15,12 @@ router.post('/', function(req, res){
       'http://dataservice.accuweather.com/locations/v1/'+locationKey+'?apikey='+keys.api_key+'&language=en-us&details=true',
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
+              // console.log(body)
               let obj = JSON.parse(body)
               returnData['geoLocation'] = obj
           }
           else{
+            // console.log(error)
             return error
           }
       })

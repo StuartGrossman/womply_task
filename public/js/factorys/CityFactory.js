@@ -10,6 +10,8 @@
 
 
 		o.CitySender = function(city){
+			console.log(city)
+
 			var q = $q.defer();
 			$http.post('/city/', city).success(function(res){
 				q.resolve(res);
